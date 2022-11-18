@@ -27,7 +27,4 @@ img1 = PhotoImage(file='diet1.png')
 lblimg1 = Label(top,image = img1)
 lblimg1.place(x=10,y=80)
 '''
-
-
-
 top.mainloop()
