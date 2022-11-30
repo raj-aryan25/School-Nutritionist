@@ -1,69 +1,39 @@
+#treeview properties to set dimension
 from tkinter import *
 import mysql.connector
-
-exe = mysql.connector.connect(user='root', host='localhost',database='rajlakshya',password='tiger25dec')
+exe = mysql.connector.connect(
+        user='root',host='localhost',database='schoolnutritionist',password='tiger')
 cur = exe.cursor()
 
-def signupgo():
-    def signup():
-        uname = uname_txt.get()
-        uid = uid_txt.get()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def signupgo(frame,frame2):
-    def signup():
-        uname = str(uname_txt.get())
-        uid = str(uid_txt.get())
-        pwd = str(pwd_txt.get())
-        phone = str(phone_txt.get())
-        print(uname)
-
-        query1 = 'select count(*) from user where userid = "{}"'.format(uid)
-        cur.execute(query1)
-        ans = cur.fetchone()
-        print(ans)
-        if ans[0] == 1:
-            msg = Text(frame,text='User ID already exists!' ,width = 40,bg='cyan'); msg.place(x=80,y=280)
-        elif ans[0] == 0:
-            query2 = 'insert into user values("{}","{}","{}",{})'.format(uname,uid,pwd,phone)
-            cur.execute(query2)
-            cur.execute('commit')
-            msg = Text(frame,text='Sign Up Successful!' ,width = 40,bg='cyan'); msg.place(x=80,y=280)
-        else:
-            msg = Text(frame,text='Error! Try again' ,width = 40,bg='cyan'); msg.place(x=80,y=280)
-
-    frame2.place_forget()
-    frame.place(x=50,y=100)
-    uname_lbl = Label(frame, text = 'Name', width = 25);  uname_lbl.place(x=40,y=80)
-    uid_lbl = Label(frame, text = 'Username', width = 25);  uid_lbl.place(x=40,y=120)
-    pwd_lbl = Label(frame, text = 'Username', width = 25);  pwd_lbl.place(x=40,y=160)
-    phone_lbl = Label(frame, text = 'Username', width = 25);   phone_lbl.place(x=40,y=200)
-    uname_txt = Entry(frame,width = 25);    uname_txt.place(x=150,y=80)
-    uid_txt = Entry(frame,width = 25);  uid_txt.place(x=150,y=120)
-    pwd_txt = Entry(frame,width = 25);  pwd_txt.place(x=150,y=160)
-    phone_txt = Entry(frame,width = 25);   phone_txt.place(x=150,y=200)
-    signup_btn = Button(frame, text='Signup',width=20,command=signup())
-    signup_btn.place(x=180,y=280)
+def login(frame):
+        def log_in():
+                uid=e1.get()
+                pwd=e2.get()
+                print(str(uid),str(pwd))
+                if uid == "" or pwd == "":
+                        print("No userid or or pwd found")
+                        logoutput = Label(frame, text="User ID or Password\nnot entered",font=stylelogin)
+                        logoutput.place(x=20,y=400)
+                else:
+                        query1 = '''select * from user where userid = "{}" and password="{}"'''.format(uid,pwd)
+                        cur.execute(query1)
+                        ans = cur.fetchone()
+                        if ans!= None:
+                                logoutput = Label(frame, text="Log In Successful\nOpening Main Window",font=stylelogin)
+                                logoutput.place(x=20,y=400)
+                        else:
+                                logoutput = Label(frame, text="Invalid Credentials\nLogin Failed",font=stylelogin)
+                                logoutput.place(x=20,y=400)
+                                        
+        frame.tkraise()
+        stylelogin = ("Helvetica",15)
+        uid=StringVar()
+        pwd=StringVar()
+        Label(frame,text="Enter Login Credentials",width=30,bg='#0E6655',fg='white',font=('Tahoma',20)).place(x=21,y=30)
+        Label(frame,text='User ID', width = 16,bg='olive',fg='red', font = stylelogin).place(x=50,y=160)
+        Label(frame,text='Password', width = 16,bg='olive',fg='red', font = stylelogin).place(x=50,y=260)
+        e1=Entry(frame,textvariable=uid,bg='#D7BDE2',width = 15,font=stylelogin);e1.place(x=270,y=160)
+        e2=Entry(frame,textvariable=pwd,bg='#D7BDE2',width = 15,font=stylelogin);e2.place(x=270,y=260)
+        Button(frame,text="Login",command=log_in,bg='olive',fg='white',font=stylelogin,width=14).place(x=250,y=340)
+        
+        
