@@ -10,7 +10,7 @@ def nextscr():
         signupframe.destroy()
 
 main = Tk()
-main.geometry("1300x700")
+main.geometry("1300x680")
 main.title("School Nutritionist")
 main.configure(bg='#ebf5fb')
 main.resizable(False,False)
@@ -35,17 +35,17 @@ projectname.place(x=22,y=400)
 userid_final = ''
 welcome = '''Welcome to School Nutritionist\n
 Your own School Nutrition Management System'''
-Label(welcomeframe,text=welcome,font=("Tahoma",16)).place(x=22,y=30)
-Label(welcomeframe,text='Login to Continue', font = style2,width=25).place(x=30,y=170)
-Button(welcomeframe,text="Login",font=style1,width = 16,command=lambda:ls.login(loginframe)).place(x=130,y=235)
+Label(welcomeframe,text=welcome,bg="#97CDED",font=("Tahoma",16)).place(x=22,y=30)
+Label(welcomeframe,text='Login to Continue',bg="#97CDED", font = style2,width=25).place(x=30,y=170)
+Button(welcomeframe,text="Login",font=style1,width = 16,bg="#F09C9C",fg='#118B73',command=lambda:ls.login(loginframe)).place(x=130,y=235)
 Label(welcomeframe, text='or',bg='#F9E79F',font=style1).place(x=240,y=300)
-Label(welcomeframe,text='New to the App?\nCreate New Account', font = style2,width=25).place(x=32,y=340)
-Button(welcomeframe,text="Signup",font=style1,width=16,command=lambda:ls.signup(signupframe)).place(x=130,y=435)
-back_login = Button(loginframe,text="Go Back", font=("Helvetica",15), width=10,bg="#fbf5ab",command=lambda:welcomeframe.tkraise())
+Label(welcomeframe,text='New to the App?\nCreate New Account',bg="#97CDED", font = style2,width=25).place(x=32,y=340)
+Button(welcomeframe,text="Signup",font=style1,bg="#F09C9C",fg='#118B73',width=16,command=lambda:ls.signup(signupframe)).place(x=130,y=435)
+back_login = Button(loginframe,text="Go Back", font=("Helvetica",15), width=10,bg="cyan",fg='green',command=lambda:welcomeframe.tkraise())
 back_login.place(x = 50, y = 480)
-back_signup = Button(signupframe,text="Go Back", font=("Helvetica",15), width=10,bg="#fbf5ab",command=lambda:welcomeframe.tkraise())
+back_signup = Button(signupframe,text="Go Back", font=("Helvetica",15), width=10,bg="#fbf5ab",fg='blue',command=lambda:welcomeframe.tkraise())
 back_signup.place(x = 50, y = 480)
-Button(loginframe,text="Login",command=nextscr,bg='olive',fg='white',font=("Helvetica",15),width=14).place(x=260,y=360)
+Button(loginframe,text="Login",command=nextscr,bg='cyan',fg='green',font=("Helvetica",15),width=14).place(x=260,y=360)
 
 welcomeframe.tkraise()
 

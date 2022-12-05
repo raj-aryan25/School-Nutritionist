@@ -3,14 +3,14 @@ import mysql.connector
 import table_graphs as tg
 from tkinter import messagebox
 
-exe = mysql.connector.connect(user= 'root',host='localhost',database='schoolnutritionist',password='tiger25dec')
+exe = mysql.connector.connect(user= 'root',host='localhost',database='schoolnutritionist',password='tiger')
 cur=exe.cursor()
 
 main = ''
 iron = 0; calcium = 0; proteins = 0; vit_d = 0; vit_c = 0
-
-
+report_img =''
 def options(uid):
+    global report_img
     def existing_record():
         query = '''select * from patient_nutrilvl where userid = "{}"'''.format(uid)
         cur.execute(query)
@@ -27,9 +27,9 @@ def options(uid):
     optionframe.pack(fill = BOTH, padx=30,pady=30)
     report_img = PhotoImage(file='reports.png')
     report_img_lbl = Label(optionframe, image=report_img)
-    report_img_lbl.place(x=50,y=50)
-    Button(optionframe,text='View Previous Record',width = 25,bg='pink',font=('Roboto',20),command=existing_record).place(x=630,y=200)
-    Button(optionframe,text='Create New Record',width = 25,bg='pink',font=('Roboto',20),command=new_record).place(x=630,y=300)
+    report_img_lbl.place(x=90,y=25)
+    Button(optionframe,text='View Previous Record',width = 25,bg='pink',font=('Roboto',20),command=existing_record).place(x=650,y=200)
+    Button(optionframe,text='Create New Record',width = 25,bg='pink',font=('Roboto',20),command=new_record).place(x=650,y=300)
 
 def entry_of_food(uid):
     global main
