@@ -4,12 +4,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tkinter import ttk
 
-exe = mysql.connector.connect(user='root',host='localhost',password='tiger25dec',database='schoolnutritionist')
+exe = mysql.connector.connect(user='root',host='localhost',password='tiger',database='schoolnutritionist')
 cur = exe.cursor()
 main = ''
 mainframe = ''
 low_intake=''
 suggestions=''
+
+img_report = ''
 
 def low_nutrients(uid,age):
 
@@ -25,19 +27,19 @@ def low_nutrients(uid,age):
     age_data = age_data[1:6]
     if patient_data[0] < age_data[0]:
         low_values.append('Iron')
-        suggestions += '\nLow Intake of Iron.\n'
+        suggestions += '\n> Low Intake of Iron.\n - Consume Chicken, Dark Chocolate, Spinach, \n   Legumes.'
     if patient_data[1] < age_data[1]:
         low_values.append('Calcium')
-        suggestions += '\nLow Intake of Calcium.\n'
+        suggestions += '\n> Low Intake of Calcium.\n - Consume Milk, Yogurt, Almonds, Broccoli'
     if patient_data[2] < age_data[2]:
         low_values.append('Proteins')
-        suggestions += '\nLow Intake of Proteins.\n'
+        suggestions += '\n> Low Intake of Proteins.\n - Consume Eggs, Milk, Peas, Soybean'
     if patient_data[3] < age_data[3]:
         low_values.append('Vitamin D')
-        suggestions += '\nLow Intake of Vitamin D.\n'
+        suggestions += '\n> Low Intake of Vitamin D.\n - Consume Milk, Egg, Mushroom, VitaminD \n   supplements'
     if patient_data[4] < age_data[4]:
         low_values.append('Vitamin C')
-        suggestions += '\nLow Intake of Vitamin C.\n'
+        suggestions += '\n> Low Intake of Vitamin C.\n - Consume Orange, Kiwi, Sprouts, Guava'
     if low_values == []:
         low_intake = 'None  '
         suggestions = 'Your Nutrition levels are good.\nGood job.\nKeep it Maintained'
@@ -48,6 +50,7 @@ def low_nutrients(uid,age):
 
 
 def table(uid,age):
+    global img_report
     def go_back():
         tableframe.pack_forget()
         reportframe.pack(fill = BOTH,padx=20,pady=20)
@@ -63,7 +66,7 @@ def table(uid,age):
     reportframe.pack_forget()
     tableframe = Frame(main, bg = '#d2fc82', width = 1000, height = 580)
     tableframe.pack(fill=BOTH,padx=20,pady=20)
-    Label(tableframe, text='Table',font=('Helvetica',30),width = 20).place(x=620,y=80)
+    Label(tableframe, text='Table',font=('Helvetica',30),bg='#F7BD7A',width = 20).place(x=620,y=80)
     style_ttk = ttk.Style()
     style_ttk.configure("Trreview", bg='yellow',fg='red',rowheight = 25,fieldbackground='grey')
     table = ttk.Treeview(tableframe,height=10,column=(1,2,3,4),show="headings")
@@ -83,7 +86,7 @@ def table(uid,age):
     table.insert('', 'end', text="5", values=('5','Vitamin C(mg)',age_data[4],patient_data[4]))
     img_report = PhotoImage(file="reports.png")
     img1 = Label(tableframe,image = img_report)
-    img1.place(x=50,y=50)
+    img1.place(x=35,y=35)
     Button(tableframe,text='Go Back',command=go_back,font=20,width = 16).place(x=750,y=480)
 
 
@@ -153,12 +156,12 @@ def reports(uid,age):
     low_nutrients(uid,age)
     report_lbl = Label(reportframe,text="REPORT",bg='yellow',fg='Purple',width = 54,font=('Candara',30,'bold'))
     report_lbl.place(x=25,y=25)
-    Label(reportframe,text="Nutrients Deficient",width = 20,font=style,bg='#E59866',fg='#A9CCE3').place(x=165,y=100)
+    Label(reportframe,text="Nutrients Deficient",width = 20,font=style,bg='#E59866',fg='#A9CCE3').place(x=195,y=100)
     Label(reportframe,text=low_intake[:-2],width=40,font=style,bg='#AED6F1',fg='#F39C12').place(x=585,y=100)
     Label(reportframe,text="Suggestions",width = 20,font = style,bg='#E59866',fg='#A9CCE3').place(x=195,y=165)
-    suggestion_txt = Text(reportframe,width = 30,height=10,bg='light cyan',font=style)
+    suggestion_txt = Text(reportframe,width =45,height=12,bg='light cyan',font=("Courier",17,'bold'))
     suggestion_txt.insert(END, suggestions[1:])
-    suggestion_txt.place(x=130,y=225)
+    suggestion_txt.place(x=100,y=225)
     Button(reportframe,text = "Table",font=style,width = 20,command =lambda:table(uid,age)).place(x=775,y=250)
     Button(reportframe,text = "Bar Graph",font=style,width = 20,command=lambda:graph(uid,age)).place(x=775,y=350)
     Button(reportframe,text = "Line Chart",font=style,width = 20,command=lambda:chart(uid,age)).place(x=775,y=450)
