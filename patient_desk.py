@@ -122,7 +122,7 @@ def entry_of_food(uid):
     Label(mainframe, text = 'Enter average daily consumption',width = 78,font=style).place(x=40,y=30)
     Label(mainframe,bg='#F1948A', text = "Apple(no.)", width = 20,font = style).place(x=50,y=120)
     Label(mainframe,bg='#F1948A', text = "Oranges(no.)", width = 20,font = style).place(x=50,y=190)
-    Label(mainframe,bg='#F1948A', text = "Spinach(in g)", width = 20,font = style).place(x=50,y=260)
+    Label(mainframe,bg='#F1948A', text = "Green Veggies(in g)", width = 20,font = style).place(x=50,y=260)
     Label(mainframe,bg='#F1948A', text = "Legumes(in g)", width = 20,font = style).place(x=50,y=330)
     Label(mainframe,bg='#F1948A', text = "Green peas(in g)", width = 20,font = style).place(x=50,y=400)
     Label(mainframe,bg='#F1948A', text = "Milk(no.of cups)", width = 20,font = style).place(x=670,y=120)
